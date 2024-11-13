@@ -1,0 +1,71 @@
+{{ block "contact-form" . }}
+<form id="contact-form" hx-post="/contacts" hx-swap="outerHTML">
+    <label for="name">Name</label>
+    <input name="name"
+        {{ if .Values }}
+            {{ if .Values.name }}
+                value="{{ .Values.name }}"
+            {{ end }}
+        {{ end }}
+        placeholder="Enter your name">
+
+        {{ if (.Errors) }}
+            {{ if (.Errors.name) }}
+                <div class="error">{{ .Errors.name }}</div>
+            {{ end }}
+        {{ end }}
+
+    <label for="email">Email</label>
+    <input type="email"
+        {{ if (.Values) }}
+            {{ if (.Values.email) }}
+                value="{{ .Values.email }}"
+            {{ end }}
+        {{ end }}
+        name="email" placeholder="Enter your email">
+
+        {{ if (.Errors) }}
+            {{ if (.Errors.email) }}
+                <div class="error">{{ .Errors.email }}</div>
+            {{ end }}
+        {{ end }}
+
+    <button class="button" type="submit">Submit</button>
+</form>
+{{ end }}
+
+{{ block "contact-list" . }}
+    <div id="contacts">
+    {{ range .Contacts }}
+        {{ template "contact" . }}
+    {{ end }}
+    </div>
+{{ end }}
+
+{{ block "contact" . }}
+<div class="contact">
+    <div
+        class="trash"
+        hx-indicator="#di-{{ .ID }}"
+        hx-delete="/contacts/{{ .ID }}"
+        hx-swap="outerHTML swap:500ms"
+        hx-target="closest .contact">
+        <img src="/static/img/trash.svg" alt="trash" style="width: 24px; height: 24px;">
+    </div>
+
+    <span>{{ .Name }} {{ .Email }}</span>
+
+    <div
+        id="di-{{ .ID }}"
+        class="htmx-indicator"
+        style="width: 24px; height: 24px;">
+        <img src="/static/img/bars.svg" alt="loading" style="width: 24px; height: 24px;">
+    </div>
+</div>
+{{ end }}
+
+{{ block "oob-contact" . }}
+<div id="contacts" hx-swap-oob="afterend">
+    {{ template "contact" . }}
+</div>
+{{ end }}

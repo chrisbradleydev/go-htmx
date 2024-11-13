@@ -1,0 +1,14 @@
+{{ define "title" }}Contacts{{ end }}
+
+{{ define "main" }}
+    <!-- Form with validation -->
+    <div class="container">
+        <h2>Form with Validation</h2>
+        <div class="container">
+            {{ template "contact-form" .FormData }}
+        </div>
+        <div class="container">
+            {{ template "contact-list" .PageData }}
+        </div>
+    </div>
+{{ end }}

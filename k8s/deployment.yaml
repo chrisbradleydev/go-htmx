@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: go-htmx
+  namespace: go-htmx
+spec:
+  selector:
+    matchLabels:
+      app: go-htmx
+  template:
+    metadata:
+      labels:
+        app: go-htmx
+    spec:
+      containers:
+      - name: go-htmx
+        image: go-htmx
+        imagePullPolicy: Never
+        resources:
+          limits:
+            memory: 128Mi
+            cpu: 200m
+        ports:
+          - containerPort: 8080
+        env:
+        - name: APP_PORT
+          value: "8080"
+        - name: APP_ENV
+          value: "development"
+        command:
+        - /app/main
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: go-htmx
+  namespace: go-htmx
+spec:
+  selector:
+    app: go-htmx
+  ports:
+  - port: 8080
+    targetPort: 8080

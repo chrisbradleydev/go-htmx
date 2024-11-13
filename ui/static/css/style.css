@@ -1,0 +1,126 @@
+/* Minimal CSS Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  font-family: sans-serif;
+  font-size: 18px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+/* Global CSS */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  max-width: 300px;
+}
+
+header {
+  padding: 2px;
+}
+
+footer {
+  background-color: #181a18;
+  color: #fff;
+  flex-shrink: 0;
+  margin-top: auto;
+  padding: 1rem;
+  text-align: center;
+}
+
+input {
+  padding: 2px;
+}
+
+.button {
+  background-color: #00add8;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  display: block;
+  padding: 10px;
+  font-size: 18px;
+  text-decoration: none;
+}
+
+.container {
+  margin-top: 10px;
+  padding: 2px;
+}
+
+/* HTMX CSS */
+.htmx-indicator {
+  opacity: 0;
+  transition: opacity 500ms ease-in;
+}
+
+.htmx-request .htmx-indicator {
+  opacity: 1;
+}
+
+.htmx-request.htmx-indicator {
+  opacity: 1;
+}
+
+/* Contact Form CSS */
+form#contact-form {
+  display: flex;
+  flex-direction: column;
+  max-width: 300px;
+}
+
+form#contact-form > button,
+label,
+input {
+  margin-top: 2px;
+}
+
+.contact {
+  display: flex;
+}
+
+.contact.htmx-swapping {
+  opacity: 0;
+  transition: opacity 500ms ease-in;
+}
+
+.error {
+  color: #cc0000;
+}
+
+.trash {
+  cursor: pointer;
+  height: 24px;
+  width: 24px;
+}
