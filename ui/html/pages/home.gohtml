@@ -1,0 +1,40 @@
+{{ define "title" }}Home{{ end }}
+
+{{ define "main" }}
+    <!-- Search with loading indicator -->
+    <div class="container">
+        <h2>Live Search</h2>
+        <input type="text"
+            name="search"
+            placeholder="Search contacts..."
+            hx-post="/search"
+            hx-trigger="keyup changed delay:500ms"
+            hx-target="#search-results"
+            hx-indicator="#search-indicator">
+        <img id="search-indicator"
+            class="htmx-indicator"
+            src="/static/img/bars.svg"/>
+        <div id="search-results" class="container">
+            <ul>
+                {{ range .PageData.Contacts }}
+                    <li>{{ .Name }}</li>
+                {{ end }}
+            </ul>
+        </div>
+    </div>
+
+    <!-- Click to load more -->
+    <div class="container">
+        <h2>Load More Pattern</h2>
+        <button class="button"
+            hx-get="/roll-d20"
+            hx-target="#dice-results"
+            hx-swap="afterbegin"
+            style="margin-top: 2px;">
+            Roll D20
+        </button>
+        <div class="container">
+            <div id="dice-results" style="max-height: 100px; overflow: hidden;"></div>
+        </div>
+    </div>
+{{ end }}
