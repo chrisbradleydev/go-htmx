@@ -1,0 +1,41 @@
+{{ define "title" }}Home{{ end }}
+
+{{ define "main" }}
+    <!-- Search with loading indicator -->
+    <div class="container">
+        <h2>Live Search</h2>
+        <input type="text"
+            name="search"
+            placeholder="Search characters..."
+            hx-post="/search"
+            hx-trigger="keyup changed delay:500ms"
+            hx-target="#search-results"
+            hx-indicator="#search-indicator">
+        <img id="search-indicator"
+            class="htmx-indicator"
+            src="/static/img/bars.svg"/>
+        <div id="search-results" class="container">
+            <ul>
+                {{ range .PageData.Contacts }}
+                    <li>{{ .Name }}</li>
+                {{ end }}
+            </ul>
+        </div>
+    </div>
+
+    <!-- Click to load more -->
+    <div class="container">
+        <h2>Load More Pattern</h2>
+        <div id="items" class="container">
+            {{ range .PageData.Items }}
+                <div class="item">{{ . }}</div>
+            {{ end }}
+        </div>
+        <button class="button"
+            hx-get="/load-more"
+            hx-target="#items"
+            hx-swap="beforeend">
+            Load More
+        </button>
+    </div>
+{{ end }}

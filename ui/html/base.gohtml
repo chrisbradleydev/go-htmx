@@ -1,0 +1,26 @@
+{{ define "base" }}
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{{ template "title" . }} - go-htmx</title>
+        <link rel="stylesheet" href="/static/css/style.css">
+        <link rel="shortcut icon" href="/static/img/favicon.ico" type="image/x-icon">
+    	<script src="https://unpkg.com/htmx.org@2.0.3/dist/htmx.min.js" type="text/javascript"></script>
+    </head>
+    <body>
+        <header>
+            <h1>go-htmx</h1>
+        </header>
+        {{ template "nav" . }}
+        <main>
+            {{ template "main" . }}
+        </main>
+        <footer>
+            Powered by <a href="https://chrisbradley.dev">chrisbradleydev</a> in {{.CurrentYear}}
+        </footer>
+        <script src="/static/js/main.js" type="text/javascript"></script>
+    </body>
+</html>
+{{ end }}
